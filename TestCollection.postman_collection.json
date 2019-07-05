@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "263facf0-5273-44b3-ac11-89e6737aa388",
+		"name": "TestCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateCredit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"creditDto\":{\r\n    \"nameCredit\":\"Test Credit Name1\"\r\n  },\r\n  \"customer\":{\r\n    \"firstNameCustomer\":\"Test First Name1\",\r\n    \"lastNameCustomer\":\"Test Last Name1\",\r\n    \"peselCustomer\":\"TestPesel1\"\r\n  },\r\n  \"product\":{\r\n    \"productName\":\"Test Product Name1\",\r\n    \"value\":116\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8081/credit/CreateCredit",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"credit",
+						"CreateCredit"
+					]
+				},
+				"description": "Use for credit creation"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCredits",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/credit/GetCredits",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"credit",
+						"GetCredits"
+					]
+				},
+				"description": "use to get all credits details"
+			},
+			"response": []
+		}
+	]
+}
