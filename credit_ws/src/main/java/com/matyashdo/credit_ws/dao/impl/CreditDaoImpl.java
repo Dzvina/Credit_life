@@ -39,4 +39,12 @@ public class CreditDaoImpl implements CreditDao {
         return credits;
     }
 
+    @Override
+    public Credit getCreditById(int creditId) {
+        Credit credit;
+        String sql = "select * from credit where credit_id = ?";
+        credit = jdbcTemplate.queryForObject(sql,new Object[]{creditId}, new BeanPropertyRowMapper<>(Credit.class));
+        return credit;
+    }
+
 }
