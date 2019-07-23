@@ -9,11 +9,11 @@ import java.text.MessageFormat;
 
 public class RestClient {
 
-    private static final String CUSTOMER_BASE_URL = "http://customer:8082/customer";
+    private static final String CUSTOMER_BASE_URL = "http://localhost:8082/customer";
     private static final String CREATE_CUSTOMER_PATH = "/creditId/{0}/firstNameCustomer/{1}/lastNameCustomer/{2}/peselCustomer/{3}/create";
     private static final String GET_CUSTOMER_PATH = "/creditId/{0}/getCustomer";
 
-    private static final String PRODUCT_BASE_URL = "http://product:8083/product";
+    private static final String PRODUCT_BASE_URL = "http://localhost:8083/product";
     private static final String CREATE_PRODUCT_PATH = "/creditId/{0}/productName/{1}/value/{2}/create";
     private static final String GET_PRODUCT_PATH = "/creditId/{0}/getProduct";
 
