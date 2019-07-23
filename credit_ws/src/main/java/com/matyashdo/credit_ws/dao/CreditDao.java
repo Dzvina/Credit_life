@@ -9,4 +9,6 @@ public interface CreditDao {
     int addCredit(Credit credit);
 
     List<Credit> getAllCredits();
+
+    Credit getCreditById(int creditId);
 }

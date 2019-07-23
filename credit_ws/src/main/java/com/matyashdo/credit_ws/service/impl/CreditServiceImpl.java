@@ -40,19 +40,31 @@ public class CreditServiceImpl implements CreditService {
         List<Credit> credits = creditDao.getAllCredits();
         List<CreditDetails> creditDetailsList = new ArrayList<>();
         for (Credit credit : credits) {
-            CreditDetails creditDetails = new CreditDetails();
-
-            CreditDto creditDto = new CreditDto();
-            creditDto.setNameCredit(credit.getNameCredit());
-
-            Customer customer = RestClient.getCustomer(credit.getCreditId());
-            Product product = RestClient.getProduct(credit.getCreditId());
-
-            creditDetails.setCreditDto(creditDto);
-            creditDetails.setCustomer(customer);
-            creditDetails.setProduct(product);
-            creditDetailsList.add(creditDetails);
+            creditDetailsList.add(createCreditDetails(credit));
         }
         return creditDetailsList;
+    }
+
+    @Override
+    public CreditDetails getCreditById(int creditId) {
+        Credit credit = creditDao.getCreditById(creditId);
+        CreditDetails creditDetails = createCreditDetails(credit);
+
+        return creditDetails;
+    }
+
+    private CreditDetails createCreditDetails(Credit credit) {
+        CreditDetails creditDetails = new CreditDetails();
+
+        CreditDto creditDto = new CreditDto();
+        creditDto.setNameCredit(credit.getNameCredit());
+
+        Customer customer = RestClient.getCustomer(credit.getCreditId());
+        Product product = RestClient.getProduct(credit.getCreditId());
+
+        creditDetails.setCreditDto(creditDto);
+        creditDetails.setCustomer(customer);
+        creditDetails.setProduct(product);
+        return creditDetails;
     }
 }

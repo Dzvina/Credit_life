@@ -10,4 +10,6 @@ public interface CreditService {
     int addCredit(CreditDetails creditDetails);
 
     List<CreditDetails> getAllCredits();
+
+    CreditDetails getCreditById(int creditId);
 }
