@@ -6,12 +6,25 @@ import static org.junit.Assert.*;
 
 public class CustomerTest {
 
+    private static final int CUSTOMER_ID = 1;
     private static final int CREDIT_ID = 1;
     private static final String FIRST_NAME_CUSTOMER = "Name";
     private static final String LAST_NAME_CUSTOMER = "Surname";
     private static final String PESEL_CUSTOMER = "12345678901";
 
     Customer customer = new Customer();
+
+    @Test
+    public void getCustomerId() {
+        customer.setCustomerId(CUSTOMER_ID);
+        assertEquals(CUSTOMER_ID, customer.getCustomerId());
+    }
+
+    @Test
+    public void setCustomerId() {
+        customer.setCustomerId(CUSTOMER_ID);
+        assertEquals(CUSTOMER_ID, customer.getCustomerId());
+    }
 
     @Test
     public void getCreditId() {
@@ -63,12 +76,14 @@ public class CustomerTest {
 
     @Test
     public void testEquals() {
+        customer.setCustomerId(CUSTOMER_ID);
         customer.setCreditId(CREDIT_ID);
         customer.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         customer.setLastNameCustomer(LAST_NAME_CUSTOMER);
         customer.setPeselCustomer(PESEL_CUSTOMER);
 
         Customer customer1 = new Customer();
+        customer1.setCustomerId(CUSTOMER_ID);
         customer1.setCreditId(CREDIT_ID);
         customer1.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         customer1.setLastNameCustomer(LAST_NAME_CUSTOMER);
@@ -79,12 +94,14 @@ public class CustomerTest {
 
     @Test
     public void testHashCode() {
+        customer.setCustomerId(CUSTOMER_ID);
         customer.setCreditId(CREDIT_ID);
         customer.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         customer.setLastNameCustomer(LAST_NAME_CUSTOMER);
         customer.setPeselCustomer(PESEL_CUSTOMER);
 
         Customer customer1 = new Customer();
+        customer1.setCustomerId(CUSTOMER_ID);
         customer1.setCreditId(CREDIT_ID);
         customer1.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         customer1.setLastNameCustomer(LAST_NAME_CUSTOMER);
@@ -95,12 +112,13 @@ public class CustomerTest {
 
     @Test
     public void testToString() {
+        customer.setCustomerId(CUSTOMER_ID);
         customer.setCreditId(CREDIT_ID);
         customer.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         customer.setLastNameCustomer(LAST_NAME_CUSTOMER);
         customer.setPeselCustomer(PESEL_CUSTOMER);
 
-        String expectedString = "Customer{creditId=1, firstNameCustomer='Name', lastNameCustomer='Surname', peselCustomer='12345678901'}";
+        String expectedString = "Customer{customerId=1, creditId=1, firstNameCustomer='Name', lastNameCustomer='Surname', peselCustomer='12345678901'}";
         assertEquals(customer.toString(), expectedString);
     }
 }

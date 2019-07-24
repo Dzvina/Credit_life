@@ -8,6 +8,10 @@ import java.util.Objects;
 public class Customer {
 
     @Id
+    @Column(name = "customer_id")
+    private int customerId;
+
+    @Id
     @Column(name = "credit_id")
     private int creditId;
 
@@ -28,6 +32,14 @@ public class Customer {
         this.firstNameCustomer = firstNameCustomer;
         this.lastNameCustomer = lastNameCustomer;
         this.peselCustomer = peselCustomer;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public int getCreditId() {
@@ -67,7 +79,8 @@ public class Customer {
         if (this == o) return true;
         if (!(o instanceof Customer)) return false;
         Customer customer = (Customer) o;
-        return creditId == customer.creditId &&
+        return customerId == customer.customerId &&
+                creditId == customer.creditId &&
                 firstNameCustomer.equals(customer.firstNameCustomer) &&
                 lastNameCustomer.equals(customer.lastNameCustomer) &&
                 peselCustomer.equals(customer.peselCustomer);
@@ -75,13 +88,14 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(creditId, firstNameCustomer, lastNameCustomer, peselCustomer);
+        return Objects.hash(customerId, creditId, firstNameCustomer, lastNameCustomer, peselCustomer);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "creditId=" + creditId +
+                "customerId=" + customerId +
+                ", creditId=" + creditId +
                 ", firstNameCustomer='" + firstNameCustomer + '\'' +
                 ", lastNameCustomer='" + lastNameCustomer + '\'' +
                 ", peselCustomer='" + peselCustomer + '\'' +

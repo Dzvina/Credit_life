@@ -24,4 +24,10 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomer(int creditId) {
         return customerDao.getCustomer(creditId);
     }
+
+    @Override
+    public List<Integer> getCreditIdsByCustomerId(int customerId) {
+        List<Integer> creditId = customerDao.getCreditIdsByCustomerId(customerId);
+        return creditId;
+    }
 }

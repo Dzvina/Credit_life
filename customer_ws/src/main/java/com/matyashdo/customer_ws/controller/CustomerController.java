@@ -5,6 +5,8 @@ import com.matyashdo.customer_ws.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -24,5 +26,11 @@ public class CustomerController {
     @GetMapping(value = "/creditId/{creditId}/getCustomer")
     public Customer getCustomer(@PathVariable("creditId")int creditId) {
         return customerService.getCustomer(creditId);
+    }
+
+    @GetMapping(value = "/creditId/{customerId}/getCreditIds")
+    public List<Integer> getCreditIdsByCustomerId(int customerId){
+        List<Integer> creditId = customerService.getCreditIdsByCustomerId(customerId);
+        return creditId;
     }
 }

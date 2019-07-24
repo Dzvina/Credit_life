@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
@@ -25,4 +27,12 @@ public class CustomerDaoImpl implements CustomerDao {
         Customer customer = jdbcTemplate.queryForObject(sql, new Object[]{creditId}, new BeanPropertyRowMapper<>(Customer.class));
         return customer;
     }
+
+    @Override
+    public List<Integer> getCreditIdsByCustomerId(int customerId) {
+        String sql = "select credit_id from customer where customer_id = ?";
+        List<Integer> creditId = jdbcTemplate.queryForList(sql, new Object[]{customerId}, Integer.class);
+        return creditId;
+    }
+
 }
