@@ -29,7 +29,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/creditId/{customerId}/getCreditIds")
-    public List<Integer> getCreditIdsByCustomerId(int customerId){
+    public List<Integer> getCreditIdsByCustomerId(@PathVariable("customerId")int customerId){
         List<Integer> creditId = customerService.getCreditIdsByCustomerId(customerId);
         return creditId;
     }
