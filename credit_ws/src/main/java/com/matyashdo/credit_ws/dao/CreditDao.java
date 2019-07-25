@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface CreditDao {
 
-    int addCredit(Credit credit);
+    void addCredit(Credit credit);
 
     List<Credit> getAllCredits();
 
     Credit getCreditById(int creditId);
+
+    void deleteCreditById(int creditId);
 }

@@ -1,4 +1,4 @@
-package com.matyashdo.credit_ws.dto;
+package com.matyashdo.creditDetails_ws.dto;
 
 import org.junit.Test;
 

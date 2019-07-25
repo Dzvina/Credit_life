@@ -8,7 +8,7 @@
 4. Use following json to create credit:
 ```
 {
-  "creditDto":{
+  "credit":{
     "nameCredit":"Test Credit Name1"
   },
   "customer":{

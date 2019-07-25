@@ -1,4 +1,4 @@
-package com.matyashdo.credit_ws.dto;
+package com.matyashdo.creditDetails_ws.dto;
 
 import org.junit.Test;
 
@@ -8,20 +8,20 @@ public class CreditDetailsTest {
 
     CreditDetails creditDetails = new CreditDetails();
 
-    CreditDto creditDto = new CreditDto();
+    Credit credit = new Credit();
     Customer customer = new Customer();
     Product product = new Product();
 
     @Test
     public void testGetCreditDto() {
-        creditDetails.setCreditDto(creditDto);
-        assertEquals(creditDto, creditDetails.getCreditDto());
+        creditDetails.setCredit(credit);
+        assertEquals(credit, creditDetails.getCredit());
     }
 
     @Test
     public void testSetCreditDto() {
-        creditDetails.setCreditDto(creditDto);
-        assertEquals(creditDto, creditDetails.getCreditDto());
+        creditDetails.setCredit(credit);
+        assertEquals(credit, creditDetails.getCredit());
     }
 
     @Test
@@ -50,13 +50,13 @@ public class CreditDetailsTest {
 
     @Test
     public void testEquals() {
-        creditDetails.setCreditDto(creditDto);
+        creditDetails.setCredit(credit);
         creditDetails.setCustomer(customer);
         creditDetails.setProduct(product);
 
         CreditDetails creditDetails1 = new CreditDetails();
 
-        creditDetails1.setCreditDto(creditDto);
+        creditDetails1.setCredit(credit);
         creditDetails1.setCustomer(customer);
         creditDetails1.setProduct(product);
 
@@ -65,13 +65,13 @@ public class CreditDetailsTest {
 
     @Test
     public void testHashCode() {
-        creditDetails.setCreditDto(creditDto);
+        creditDetails.setCredit(credit);
         creditDetails.setCustomer(customer);
         creditDetails.setProduct(product);
 
         CreditDetails creditDetails1 = new CreditDetails();
 
-        creditDetails1.setCreditDto(creditDto);
+        creditDetails1.setCredit(credit);
         creditDetails1.setCustomer(customer);
         creditDetails1.setProduct(product);
 
@@ -80,11 +80,11 @@ public class CreditDetailsTest {
 
     @Test
     public void testToString() {
-        creditDetails.setCreditDto(creditDto);
+        creditDetails.setCredit(credit);
         creditDetails.setCustomer(customer);
         creditDetails.setProduct(product);
 
-        String expectedString = "CreditDetails{creditDto=CreditDto{nameCredit='null'}, customer=Customer{firstNameCustomer='null', lastNameCustomer='null', peselCustomer='null'}, product=Product{productName='null', value=0}}";
+        String expectedString = "CreditDetails{credit=Credit{nameCredit='null'}, customer=Customer{firstNameCustomer='null', lastNameCustomer='null', peselCustomer='null'}, product=Product{productName='null', value=0}}";
         assertEquals(creditDetails.toString(), expectedString);
     }
 }

@@ -1,15 +1,17 @@
 package com.matyashdo.credit_ws.service;
 
-import com.matyashdo.credit_ws.dto.CreditDetails;
+import com.matyashdo.credit_ws.dto.CreditDto;
 import com.matyashdo.credit_ws.model.Credit;
 
 import java.util.List;
 
 public interface CreditService {
 
-    int addCredit(CreditDetails creditDetails);
+    void addCredit(CreditDto creditDto);
 
-    List<CreditDetails> getAllCredits();
+    List<Credit> getAllCredits();
 
-    CreditDetails getCreditById(int creditId);
+    Credit getCreditById(int creditId);
+
+    void deleteCreditById(int creditId);
 }

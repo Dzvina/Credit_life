@@ -1,19 +1,19 @@
-package com.matyashdo.credit_ws.dto;
+package com.matyashdo.creditDetails_ws.dto;
 
 import java.util.Objects;
 
 public class CreditDetails {
 
-    private CreditDto creditDto;
+    private Credit credit;
     private Customer customer;
     private Product product;
 
-    public CreditDto getCreditDto() {
-        return creditDto;
+    public Credit getCredit() {
+        return credit;
     }
 
-    public void setCreditDto(CreditDto creditDto) {
-        this.creditDto = creditDto;
+    public void setCredit(Credit credit) {
+        this.credit = credit;
     }
 
     public Customer getCustomer() {
@@ -37,20 +37,20 @@ public class CreditDetails {
         if (this == o) return true;
         if (!(o instanceof CreditDetails)) return false;
         CreditDetails that = (CreditDetails) o;
-        return creditDto.equals(that.creditDto) &&
+        return credit.equals(that.credit) &&
                 customer.equals(that.customer) &&
                 product.equals(that.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(creditDto, customer, product);
+        return Objects.hash(credit, customer, product);
     }
 
     @Override
     public String toString() {
         return "CreditDetails{" +
-                "creditDto=" + creditDto +
+                "credit=" + credit +
                 ", customer=" + customer +
                 ", product=" + product +
                 '}';

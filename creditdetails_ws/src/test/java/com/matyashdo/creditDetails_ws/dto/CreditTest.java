@@ -1,11 +1,11 @@
-package com.matyashdo.credit_ws.dto;
+package com.matyashdo.creditDetails_ws.dto;
 
-import com.matyashdo.credit_ws.model.Credit;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class CreditDtoTest {
+public class CreditTest {
 
     private static final String NAME_CREDIT = "credit1";
     Credit credit = new Credit();
@@ -46,7 +46,7 @@ public class CreditDtoTest {
     public void testToString() {
         credit.setNameCredit(NAME_CREDIT);
 
-        String expectedString = "CreditDto{creditId=0, nameCredit='credit1'}";
+        String expectedString = "Credit{creditId=0, nameCredit='credit1'}";
         assertEquals(credit.toString(),expectedString);
     }
 }

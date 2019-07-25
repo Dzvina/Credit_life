@@ -13,6 +13,12 @@ public class Credit {
     @Column(name = "credit_id")
     private int creditId;
 
+    @Column(name ="customer_id")
+    private int customerId;
+
+    @Column(name="product_id")
+    private int productId;
+
     @Column(name = "name_credit")
     private String nameCredit;
 
@@ -22,6 +28,22 @@ public class Credit {
 
     public void setCreditId(int creditId) {
         this.creditId = creditId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getNameCredit() {
@@ -38,18 +60,22 @@ public class Credit {
         if (!(o instanceof Credit)) return false;
         Credit credit = (Credit) o;
         return creditId == credit.creditId &&
+                customerId == credit.customerId &&
+                productId == credit.productId &&
                 nameCredit.equals(credit.nameCredit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(creditId, nameCredit);
+        return Objects.hash(creditId, customerId, productId, nameCredit);
     }
 
     @Override
     public String toString() {
-        return "CreditDto{" +
+        return "Credit{" +
                 "creditId=" + creditId +
+                ", customerId=" + customerId +
+                ", productId=" + productId +
                 ", nameCredit='" + nameCredit + '\'' +
                 '}';
     }

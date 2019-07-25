@@ -5,11 +5,8 @@ import com.matyashdo.credit_ws.model.Credit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -19,17 +16,9 @@ public class CreditDaoImpl implements CreditDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public int addCredit(Credit credit) {
-        String sql = "insert into credit (name_credit) values (?)";
-        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(con -> {
-            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, credit.getNameCredit());
-            return statement;
-        }, keyHolder);
-
-        int creditId = keyHolder.getKey().intValue();
-        return creditId;
+    public void addCredit(Credit credit) {
+        String sql = "insert into credit (customer_id ,product_id ,name_credit) values (?,?,?)";
+        jdbcTemplate.update(sql, credit.getCustomerId(), credit.getProductId(), credit.getNameCredit());
     }
 
     @Override
@@ -41,10 +30,14 @@ public class CreditDaoImpl implements CreditDao {
 
     @Override
     public Credit getCreditById(int creditId) {
-        Credit credit;
         String sql = "select * from credit where credit_id = ?";
-        credit = jdbcTemplate.queryForObject(sql,new Object[]{creditId}, new BeanPropertyRowMapper<>(Credit.class));
-        return credit;
+        return jdbcTemplate.queryForObject(sql, new Object[]{creditId}, new BeanPropertyRowMapper<>(Credit.class));
+    }
+
+    @Override
+    public void deleteCreditById(int creditId) {
+        String sql = "delete from credit where credit_id = ?";
+        jdbcTemplate.update(sql, creditId);
     }
 
 }
