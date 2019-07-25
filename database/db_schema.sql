@@ -21,11 +21,10 @@ drop table if exists customer;
 create table customer
 (
   customer_id         int auto_increment,
-  credit_id           int,
   first_name_customer varchar(255),
   last_name_customer  varchar(255),
   pesel_customer      varchar(255),
-  primary key (customer_id,credit_id)
+  primary key (customer_id)
 );
 
 drop table if exists product;

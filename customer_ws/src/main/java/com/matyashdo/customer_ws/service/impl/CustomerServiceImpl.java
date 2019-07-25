@@ -1,7 +1,7 @@
 package com.matyashdo.customer_ws.service.impl;
 
 import com.matyashdo.customer_ws.dao.CustomerDao;
-import com.matyashdo.customer_ws.dao.impl.CustomerDaoImpl;
+import com.matyashdo.customer_ws.dto.CustomerDto;
 import com.matyashdo.customer_ws.model.Customer;
 import com.matyashdo.customer_ws.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +13,26 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-   private CustomerDao customerDao;
+    private CustomerDao customerDao;
 
     @Override
-    public void addCustomer(Customer customer) {
+    public void addCustomer(CustomerDto customerDto) {
+        Customer customer = new Customer(customerDto.getFirstNameCustomer(), customerDto.getLastNameCustomer(), customerDto.getPeselCustomer());
         customerDao.addCustomer(customer);
     }
 
     @Override
-    public Customer getCustomer(int creditId) {
-        return customerDao.getCustomer(creditId);
+    public List<Customer> getAllCustomers() {
+        return customerDao.getAllCustomers();
     }
 
     @Override
-    public List<Integer> getCreditIdsByCustomerId(int customerId) {
-        List<Integer> creditId = customerDao.getCreditIdsByCustomerId(customerId);
-        return creditId;
+    public Customer getCustomerById(int customerId) {
+        return customerDao.getCustomerById(customerId);
+    }
+
+    @Override
+    public void deleteCustomerById(int customerId) {
+        customerDao.deleteCustomerById(customerId);
     }
 }

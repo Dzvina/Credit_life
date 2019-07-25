@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -17,22 +18,28 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void addCustomer(Customer customer) {
-        String sql = "insert into customer (credit_id, first_name_customer, last_name_customer, pesel_customer) values(?,?,?,?)";
-        jdbcTemplate.update(sql, customer.getCreditId(), customer.getFirstNameCustomer(), customer.getLastNameCustomer(), customer.getPeselCustomer());
+        String sql = "insert into customer (first_name_customer, last_name_customer, pesel_customer) values(?,?,?)";
+        jdbcTemplate.update(sql, customer.getFirstNameCustomer(), customer.getLastNameCustomer(), customer.getPeselCustomer());
     }
 
     @Override
-    public Customer getCustomer(int creditId) {
-        String sql = "select * from customer where credit_id=?";
-        Customer customer = jdbcTemplate.queryForObject(sql, new Object[]{creditId}, new BeanPropertyRowMapper<>(Customer.class));
+    public List<Customer> getAllCustomers() {
+        String sql = "select * from customer";
+        List<Customer> customers = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Customer.class));
+        return customers;
+    }
+
+    @Override
+    public Customer getCustomerById(int customerId) {
+        String sql = "select * from customer where customer_id=?";
+        Customer customer = jdbcTemplate.queryForObject(sql, new Object[]{customerId}, new BeanPropertyRowMapper<>(Customer.class));
         return customer;
     }
 
     @Override
-    public List<Integer> getCreditIdsByCustomerId(int customerId) {
-        String sql = "select credit_id from customer where customer_id = ?";
-        List<Integer> creditId = jdbcTemplate.queryForList(sql, new Object[]{customerId}, Integer.class);
-        return creditId;
+    public void deleteCustomerById(int customerId) {
+    String sql = "delete from customer where customer_id = ?";
+    jdbcTemplate.update(sql, customerId);
     }
 
 }
