@@ -1,27 +1,37 @@
 package com.matyashdo.product_ws.controller;
 
+import com.matyashdo.product_ws.dto.ProductDto;
 import com.matyashdo.product_ws.model.Product;
 import com.matyashdo.product_ws.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     @Autowired
     ProductService productService;
 
-    @PostMapping(value = "/creditId/{creditId}/productName/{productName}/value/{value}/create")
-    public void addProduct(@PathVariable("creditId") int creditId,
-                           @PathVariable("productName") String productName,
-                           @PathVariable("value") int value) {
-        Product product = new Product(creditId, productName, value);
-        productService.addProduct(product);
+    @PostMapping(value = "/create")
+    public void addProduct(@RequestBody ProductDto productDto) {
+        productService.addProduct(productDto);
     }
 
-    @GetMapping(value = "/creditId/{creditId}/getProduct")
-    public Product getProduct(@PathVariable("creditId") int creditId) {
-        return productService.getProduct(creditId);
+    @GetMapping
+    public List<Product> getAllProduct(){
+        return productService.getAllProduct();
+    }
+
+    @GetMapping(value = "/{productId}")
+    public Product getProductById(@PathVariable("productId") int productId) {
+        return productService.getProductById(productId);
+    }
+
+    @DeleteMapping(value = "/{productId}/delete")
+    public void deleteProductById(@PathVariable int productId){
+        productService.deleteProductById(productId);
     }
 }

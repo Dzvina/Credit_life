@@ -31,8 +31,8 @@ drop table if exists product;
 
 create table product
 (
-  credit_id    int,
+  product_id    int auto_increment,
   product_name varchar(255),
   value        int,
-  primary key (credit_id)
+  primary key (product_id)
 );

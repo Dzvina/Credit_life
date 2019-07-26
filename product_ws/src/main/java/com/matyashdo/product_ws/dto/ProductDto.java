@@ -1,29 +1,16 @@
-package com.matyashdo.product_ws.model;
+package com.matyashdo.product_ws.dto;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "product")
-public class Product {
+public class ProductDto {
 
-    @Id
-    @Column(name = "product_id")
     private int productId;
 
-    @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "value")
     private int value;
 
-    public Product() {
-    }
 
-    public Product( String productName, int value) {
-        this.productName = productName;
-        this.value = value;
-    }
 
     public int getProductId() {
         return productId;
@@ -52,11 +39,11 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-        Product product = (Product) o;
-        return productId == product.productId &&
-                value == product.value &&
-                productName.equals(product.productName);
+        if (!(o instanceof ProductDto)) return false;
+        ProductDto that = (ProductDto) o;
+        return productId == that.productId &&
+                value == that.value &&
+                productName.equals(that.productName);
     }
 
     @Override
@@ -66,7 +53,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductDto{" +
                 "productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", value=" + value +

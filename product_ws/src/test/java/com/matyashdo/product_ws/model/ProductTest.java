@@ -14,14 +14,14 @@ public class ProductTest {
 
     @Test
     public void testGetCreditId() {
-       product.setCreditId(CREDIT_ID);
-       assertEquals(CREDIT_ID,product.getCreditId());
+       product.setProductId(CREDIT_ID);
+       assertEquals(CREDIT_ID,product.getProductId());
     }
 
     @Test
     public void testSetCreditId() {
-        product.setCreditId(CREDIT_ID);
-        assertEquals(CREDIT_ID,product.getCreditId());
+        product.setProductId(CREDIT_ID);
+        assertEquals(CREDIT_ID,product.getProductId());
     }
 
     @Test
@@ -50,12 +50,12 @@ public class ProductTest {
 
     @Test
     public void testEquals() {
-        product.setCreditId(CREDIT_ID);
+        product.setProductId(CREDIT_ID);
         product.setProductName(PRODUCT_NAME);
         product.setValue(VALUE);
 
         Product product1 = new Product();
-        product1.setCreditId(CREDIT_ID);
+        product1.setProductId(CREDIT_ID);
         product1.setProductName(PRODUCT_NAME);
         product1.setValue(VALUE);
 
@@ -64,12 +64,12 @@ public class ProductTest {
 
     @Test
     public void testHashCode() {
-        product.setCreditId(CREDIT_ID);
+        product.setProductId(CREDIT_ID);
         product.setProductName(PRODUCT_NAME);
         product.setValue(VALUE);
 
         Product product1 = new Product();
-        product1.setCreditId(CREDIT_ID);
+        product1.setProductId(CREDIT_ID);
         product1.setProductName(PRODUCT_NAME);
         product1.setValue(VALUE);
 
@@ -78,7 +78,7 @@ public class ProductTest {
 
     @Test
     public void testToString() {
-        product.setCreditId(CREDIT_ID);
+        product.setProductId(CREDIT_ID);
         product.setProductName(PRODUCT_NAME);
         product.setValue(VALUE);
 
