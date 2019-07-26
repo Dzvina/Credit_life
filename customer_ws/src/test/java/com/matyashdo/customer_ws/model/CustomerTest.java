@@ -14,50 +14,50 @@ public class CustomerTest {
     Customer customer = new Customer();
 
     @Test
-    public void getCustomerId() {
+    public void testGetCustomerId() {
         customer.setCustomerId(CUSTOMER_ID);
         assertEquals(CUSTOMER_ID, customer.getCustomerId());
     }
 
     @Test
-    public void setCustomerId() {
+    public void testSetCustomerId() {
         customer.setCustomerId(CUSTOMER_ID);
         assertEquals(CUSTOMER_ID, customer.getCustomerId());
     }
 
 
     @Test
-    public void getFirstNameCustomer() {
+    public void testGetFirstNameCustomer() {
         customer.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         assertEquals(FIRST_NAME_CUSTOMER, customer.getFirstNameCustomer());
     }
 
     @Test
-    public void setFirstNameCustomer() {
+    public void testSetFirstNameCustomer() {
         customer.setFirstNameCustomer(FIRST_NAME_CUSTOMER);
         assertEquals(FIRST_NAME_CUSTOMER, customer.getFirstNameCustomer());
     }
 
     @Test
-    public void getLastNameCustomer() {
+    public void testGetLastNameCustomer() {
         customer.setLastNameCustomer(LAST_NAME_CUSTOMER);
         assertEquals(LAST_NAME_CUSTOMER, customer.getLastNameCustomer());
     }
 
     @Test
-    public void setLastNameCustomer() {
+    public void testSetLastNameCustomer() {
         customer.setLastNameCustomer(LAST_NAME_CUSTOMER);
         assertEquals(LAST_NAME_CUSTOMER, customer.getLastNameCustomer());
     }
 
     @Test
-    public void getPeselCustomer() {
+    public void testGetPeselCustomer() {
         customer.setPeselCustomer(PESEL_CUSTOMER);
         assertEquals(PESEL_CUSTOMER, customer.getPeselCustomer());
     }
 
     @Test
-    public void setPeselCustomer() {
+    public void testSetPeselCustomer() {
         customer.setPeselCustomer(PESEL_CUSTOMER);
         assertEquals(PESEL_CUSTOMER, customer.getPeselCustomer());
     }

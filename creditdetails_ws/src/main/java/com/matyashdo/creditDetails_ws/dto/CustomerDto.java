@@ -3,13 +3,23 @@ package com.matyashdo.creditDetails_ws.dto;
 import java.util.Objects;
 
 
-public class Customer {
+public class CustomerDto {
+
+    private int customerId;
 
     private String firstNameCustomer;
 
     private String lastNameCustomer;
 
     private String peselCustomer;
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     public String getFirstNameCustomer() {
         return firstNameCustomer;
@@ -35,34 +45,27 @@ public class Customer {
         this.peselCustomer = peselCustomer;
     }
 
-    public Customer() {
-    }
-
-    public Customer(String firstNameCustomer, String lastNameCustomer, String peselCustomer) {
-        this.firstNameCustomer = firstNameCustomer;
-        this.lastNameCustomer = lastNameCustomer;
-        this.peselCustomer = peselCustomer;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
-        Customer customer = (Customer) o;
-        return firstNameCustomer.equals(customer.firstNameCustomer) &&
-                lastNameCustomer.equals(customer.lastNameCustomer) &&
-                peselCustomer.equals(customer.peselCustomer);
+        if (!(o instanceof CustomerDto)) return false;
+        CustomerDto that = (CustomerDto) o;
+        return customerId == that.customerId &&
+                firstNameCustomer.equals(that.firstNameCustomer) &&
+                lastNameCustomer.equals(that.lastNameCustomer) &&
+                peselCustomer.equals(that.peselCustomer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstNameCustomer, lastNameCustomer, peselCustomer);
+        return Objects.hash(customerId, firstNameCustomer, lastNameCustomer, peselCustomer);
     }
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "firstNameCustomer='" + firstNameCustomer + '\'' +
+        return "CustomerDto{" +
+                "customerId=" + customerId +
+                ", firstNameCustomer='" + firstNameCustomer + '\'' +
                 ", lastNameCustomer='" + lastNameCustomer + '\'' +
                 ", peselCustomer='" + peselCustomer + '\'' +
                 '}';

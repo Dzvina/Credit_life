@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class ProductTest {
 
-    private static final int CREDIT_ID = 1;
+    private static final int PRODUCT_ID = 1;
     private static final String PRODUCT_NAME = "Product";
     private static final int VALUE = 10;
 
@@ -14,14 +14,14 @@ public class ProductTest {
 
     @Test
     public void testGetCreditId() {
-       product.setProductId(CREDIT_ID);
-       assertEquals(CREDIT_ID,product.getProductId());
+       product.setProductId(PRODUCT_ID);
+       assertEquals(PRODUCT_ID,product.getProductId());
     }
 
     @Test
     public void testSetCreditId() {
-        product.setProductId(CREDIT_ID);
-        assertEquals(CREDIT_ID,product.getProductId());
+        product.setProductId(PRODUCT_ID);
+        assertEquals(PRODUCT_ID,product.getProductId());
     }
 
     @Test
@@ -50,12 +50,12 @@ public class ProductTest {
 
     @Test
     public void testEquals() {
-        product.setProductId(CREDIT_ID);
+        product.setProductId(PRODUCT_ID);
         product.setProductName(PRODUCT_NAME);
         product.setValue(VALUE);
 
         Product product1 = new Product();
-        product1.setProductId(CREDIT_ID);
+        product1.setProductId(PRODUCT_ID);
         product1.setProductName(PRODUCT_NAME);
         product1.setValue(VALUE);
 
@@ -64,12 +64,12 @@ public class ProductTest {
 
     @Test
     public void testHashCode() {
-        product.setProductId(CREDIT_ID);
+        product.setProductId(PRODUCT_ID);
         product.setProductName(PRODUCT_NAME);
         product.setValue(VALUE);
 
         Product product1 = new Product();
-        product1.setProductId(CREDIT_ID);
+        product1.setProductId(PRODUCT_ID);
         product1.setProductName(PRODUCT_NAME);
         product1.setValue(VALUE);
 
@@ -78,11 +78,11 @@ public class ProductTest {
 
     @Test
     public void testToString() {
-        product.setProductId(CREDIT_ID);
+        product.setProductId(PRODUCT_ID);
         product.setProductName(PRODUCT_NAME);
         product.setValue(VALUE);
 
-        String expectedString = "Product{creditId=1, productName='Product', value=10}";
+        String expectedString = "Product{productId=1, productName='Product', value=10}";
         assertEquals(product.toString(), expectedString);
     }
 }

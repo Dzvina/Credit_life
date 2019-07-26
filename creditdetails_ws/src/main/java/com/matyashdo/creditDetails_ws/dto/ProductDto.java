@@ -2,11 +2,22 @@ package com.matyashdo.creditDetails_ws.dto;
 
 import java.util.Objects;
 
-public class Product {
+public class ProductDto {
+
+    private int productId;
 
     private String productName;
 
     private int value;
+
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
     public String getProductName() {
         return productName;
@@ -27,21 +38,23 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-        Product product = (Product) o;
-        return value == product.value &&
-                productName.equals(product.productName);
+        if (!(o instanceof ProductDto)) return false;
+        ProductDto that = (ProductDto) o;
+        return productId == that.productId &&
+                value == that.value &&
+                productName.equals(that.productName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, value);
+        return Objects.hash(productId, productName, value);
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productName='" + productName + '\'' +
+        return "ProductDto{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
                 ", value=" + value +
                 '}';
     }

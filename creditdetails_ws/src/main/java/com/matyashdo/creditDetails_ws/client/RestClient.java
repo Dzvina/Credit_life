@@ -1,8 +1,8 @@
 package com.matyashdo.creditDetails_ws.client;
 
-import com.matyashdo.creditDetails_ws.dto.Credit;
-import com.matyashdo.creditDetails_ws.dto.Customer;
-import com.matyashdo.creditDetails_ws.dto.Product;
+import com.matyashdo.creditDetails_ws.dto.CreditDto;
+import com.matyashdo.creditDetails_ws.dto.CustomerDto;
+import com.matyashdo.creditDetails_ws.dto.ProductDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,21 +39,21 @@ public class RestClient {
         restTemplate.postForLocation(url, null);
     }
 
-    public static Credit getCredit(int creditId) {
+    public static CreditDto getCredit(int creditId) {
         String url = CREDIT_BASE_URL + buildPath(GET_CREDIT_PATH, String.valueOf(creditId));
-        ResponseEntity<Credit> creditResponseEntity = restTemplate.getForEntity(url, Credit.class);
+        ResponseEntity<CreditDto> creditResponseEntity = restTemplate.getForEntity(url, CreditDto.class);
         return creditResponseEntity.getBody();
     }
 
-    public static Customer getCustomer(int creditId) {
+    public static CustomerDto getCustomer(int creditId) {
         String url = CUSTOMER_BASE_URL + buildPath(GET_CUSTOMER_PATH, String.valueOf(creditId));
-        ResponseEntity<Customer> customerResponseEntity = restTemplate.getForEntity(url, Customer.class);
+        ResponseEntity<CustomerDto> customerResponseEntity = restTemplate.getForEntity(url, CustomerDto.class);
         return customerResponseEntity.getBody();
     }
 
-    public static Product getProduct(int creditId) {
+    public static ProductDto getProduct(int creditId) {
         String url = PRODUCT_BASE_URL + buildPath(GET_PRODUCT_PATH, String.valueOf(creditId));
-        ResponseEntity<Product> productResponseEntity = restTemplate.getForEntity(url, Product.class);
+        ResponseEntity<ProductDto> productResponseEntity = restTemplate.getForEntity(url, ProductDto.class);
         return productResponseEntity.getBody();
     }
 
