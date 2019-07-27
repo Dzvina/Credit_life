@@ -38,8 +38,15 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void deleteCustomerById(int customerId) {
-    String sql = "delete from customer where customer_id = ?";
-    jdbcTemplate.update(sql, customerId);
+        String sql = "delete from customer where customer_id = ?";
+        jdbcTemplate.update(sql, customerId);
+    }
+
+    @Override
+    public Customer getCustomerByPesel(String pesel) {
+        String sql = "select * from customer where pesel_customer = ?";
+        Customer customer = jdbcTemplate.queryForObject(sql, new Object[]{pesel}, new BeanPropertyRowMapper<>(Customer.class));
+        return customer;
     }
 
 }

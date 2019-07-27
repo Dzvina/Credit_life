@@ -8,7 +8,7 @@ public interface CustomerService {
 
     CustomerDto getCustomerById(int customerId);
 
-    CustomerDto getCustomerBiPesel(String pesel);
+    CustomerDto getCustomerByPesel(String pesel);
 
     void deleteCustomer(int customerId);
 }

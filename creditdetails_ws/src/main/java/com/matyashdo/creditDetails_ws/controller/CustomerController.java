@@ -23,4 +23,8 @@ public class CustomerController {
         return customerService.getCustomerById(customerId);
     }
 
+    @GetMapping(value = "/pesels/{pesel}")
+    public CustomerDto getCustomerByPesel(@PathVariable(value = "pesel") String pesel) {
+        return customerService.getCustomerByPesel(pesel);
+    }
 }

@@ -19,8 +19,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getCustomerBiPesel(String pesel) {
-        return null;
+    public CustomerDto getCustomerByPesel(String pesel) {
+        return RestClient.getCustomerByPesel(pesel);
     }
 
     @Override

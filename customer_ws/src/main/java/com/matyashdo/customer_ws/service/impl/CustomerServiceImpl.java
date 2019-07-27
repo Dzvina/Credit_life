@@ -35,4 +35,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomerById(int customerId) {
         customerDao.deleteCustomerById(customerId);
     }
+
+    @Override
+    public Customer getCustomerByPesel(String pesel) {
+        return customerDao.getCustomerByPesel(pesel);
+    }
 }

@@ -34,4 +34,9 @@ public class CustomerController {
     public void deleteCustomerById(@PathVariable("customerId") int customerId) {
         customerService.deleteCustomerById(customerId);
     }
+
+    @GetMapping(value = "/pesels/{pesel}")
+    public Customer getCustomerByPesel(@PathVariable(value = "pesel") String pesel){
+        return customerService.getCustomerByPesel(pesel);
+    }
 }

@@ -15,4 +15,6 @@ public interface CustomerService {
     Customer getCustomerById(int customerId);
 
     void deleteCustomerById(int customerId);
+
+    Customer getCustomerByPesel(String pesel);
 }

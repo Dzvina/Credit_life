@@ -14,4 +14,6 @@ public interface CustomerDao {
 
     void deleteCustomerById(int customerId);
 
+    Customer getCustomerByPesel(String pesel);
+
 }
