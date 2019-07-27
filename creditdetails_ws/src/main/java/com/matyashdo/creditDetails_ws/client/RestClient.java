@@ -14,9 +14,10 @@ public class RestClient {
     private static final String CREATE_CREDIT_PATH = "/nameCredit/{0}/create";
     private static final String GET_CREDIT_PATH = "/creditId/{0}/getCredit";
 
-    private static final String CUSTOMER_BASE_URL = "http://localhost:8082/customer";
-    private static final String CREATE_CUSTOMER_PATH = "/firstNameCustomer/{0}/lastNameCustomer/{1}/peselCustomer/{2}/create";
-    private static final String GET_CUSTOMER_PATH = "/creditId/{0}/getCustomer";
+    private static final String CUSTOMER_BASE_URL = "http://localhost:8082";
+    private static final String CREATE_CUSTOMER_PATH = "/api/v1/customers/create";
+    private static final String GET_CUSTOMER_BY_ID_PATH = "/api/v1/customers/{0}";
+    private static final String DELETE_CUSTOMER_PATH = "/api/v1/customers/{0}/delete";
 
     private static final String PRODUCT_BASE_URL = "http://localhost:8083/product";
     private static final String CREATE_PRODUCT_PATH = "/productName/{0}/value/{1}/create";
@@ -29,9 +30,9 @@ public class RestClient {
         restTemplate.postForLocation(url, null);
     }
 
-    public static void createCustomer(int creditId, String firstNameCstomer, String lastNameCustomer, String pesel) {
-        String url = CUSTOMER_BASE_URL + buildPath(CREATE_CUSTOMER_PATH, String.valueOf(creditId), firstNameCstomer, lastNameCustomer, pesel);
-        restTemplate.postForLocation(url, null);
+    public static void createCustomer(CustomerDto customerDto) {
+        String url = CUSTOMER_BASE_URL + CREATE_CUSTOMER_PATH;
+        restTemplate.postForLocation(url, customerDto);
     }
 
     public static void createProduct(int creditId, String productName, int value) {
@@ -46,7 +47,7 @@ public class RestClient {
     }
 
     public static CustomerDto getCustomer(int creditId) {
-        String url = CUSTOMER_BASE_URL + buildPath(GET_CUSTOMER_PATH, String.valueOf(creditId));
+        String url = CUSTOMER_BASE_URL + buildPath(GET_CUSTOMER_BY_ID_PATH, String.valueOf(creditId));
         ResponseEntity<CustomerDto> customerResponseEntity = restTemplate.getForEntity(url, CustomerDto.class);
         return customerResponseEntity.getBody();
     }
