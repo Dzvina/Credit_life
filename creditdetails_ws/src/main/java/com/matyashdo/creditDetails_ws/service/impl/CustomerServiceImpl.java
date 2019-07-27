@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(int customerId) {
-
+    public void deleteCustomerById(int customerId) {
+        RestClient.deleteCustomerById(customerId);
     }
 }

@@ -10,5 +10,5 @@ public interface CustomerService {
 
     CustomerDto getCustomerByPesel(String pesel);
 
-    void deleteCustomer(int customerId);
+    void deleteCustomerById(int customerId);
 }

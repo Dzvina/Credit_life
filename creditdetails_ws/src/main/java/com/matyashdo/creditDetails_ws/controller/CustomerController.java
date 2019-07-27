@@ -27,4 +27,9 @@ public class CustomerController {
     public CustomerDto getCustomerByPesel(@PathVariable(value = "pesel") String pesel) {
         return customerService.getCustomerByPesel(pesel);
     }
+
+    @DeleteMapping(value = "/{customerId}/delete")
+    public void deleteCustomerById(@PathVariable(value = "customerId") int customerId){
+        customerService.deleteCustomerById(customerId);
+    }
 }

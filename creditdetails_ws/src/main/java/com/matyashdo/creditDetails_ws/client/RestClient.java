@@ -44,6 +44,10 @@ public class RestClient {
         return customerDtoResponseEntity.getBody();
     }
 
+    public static void deleteCustomerById(int customerId) {
+        String url = CUSTOMER_BASE_URL + buildPath(DELETE_CUSTOMER_PATH, String.valueOf(customerId));
+        restTemplate.delete(url);
+    }
 
 
     public static ProductDto getProduct(int creditId) {
@@ -56,7 +60,6 @@ public class RestClient {
         String url = PRODUCT_BASE_URL + buildPath(CREATE_PRODUCT_PATH, String.valueOf(creditId), productName, String.valueOf(value));
         restTemplate.postForLocation(url, null);
     }
-
 
 
     public static void createCredit(int creditId, String nameCredit) {
