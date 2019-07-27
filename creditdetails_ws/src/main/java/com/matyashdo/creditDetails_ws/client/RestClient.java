@@ -46,8 +46,8 @@ public class RestClient {
         return creditResponseEntity.getBody();
     }
 
-    public static CustomerDto getCustomer(int creditId) {
-        String url = CUSTOMER_BASE_URL + buildPath(GET_CUSTOMER_BY_ID_PATH, String.valueOf(creditId));
+    public static CustomerDto getCustomerById(int customerId) {
+        String url = CUSTOMER_BASE_URL + buildPath(GET_CUSTOMER_BY_ID_PATH, String.valueOf(customerId));
         ResponseEntity<CustomerDto> customerResponseEntity = restTemplate.getForEntity(url, CustomerDto.class);
         return customerResponseEntity.getBody();
     }
