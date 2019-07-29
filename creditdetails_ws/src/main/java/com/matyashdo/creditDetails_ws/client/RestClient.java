@@ -20,9 +20,10 @@ public class RestClient {
     private static final String GET_CUSTOMER_BY_PESEL_PATH = "/api/v1/customers/pesels/{0}";
     private static final String DELETE_CUSTOMER_PATH = "/api/v1/customers/{0}/delete";
 
-    private static final String PRODUCT_BASE_URL = "http://localhost:8083/product";
-    private static final String CREATE_PRODUCT_PATH = "/productName/{0}/value/{1}/create";
-    private static final String GET_PRODUCT_PATH = "/creditId/{0}/getProduct";
+    private static final String PRODUCT_BASE_URL = "http://localhost:8083";
+    private static final String CREATE_PRODUCT_PATH = "/api/v1/products/create";
+    private static final String GET_PRODUCT_BY_ID_PATH = "/api/v1/products/{0}";
+    private static final String DELETE_PRODUCT_PATH = "/api/v1/products/{0}/delete";
 
     private static RestTemplate restTemplate = new RestTemplate();
 
@@ -50,16 +51,23 @@ public class RestClient {
     }
 
 
-    public static ProductDto getProduct(int creditId) {
-        String url = PRODUCT_BASE_URL + buildPath(GET_PRODUCT_PATH, String.valueOf(creditId));
+
+    public static void createProduct(ProductDto productDto) {
+        String url = PRODUCT_BASE_URL + buildPath(CREATE_PRODUCT_PATH);
+        restTemplate.postForLocation(url, productDto);
+    }
+
+    public static ProductDto getProductById(int productId) {
+        String url = PRODUCT_BASE_URL + buildPath(GET_PRODUCT_BY_ID_PATH, String.valueOf(productId));
         ResponseEntity<ProductDto> productResponseEntity = restTemplate.getForEntity(url, ProductDto.class);
         return productResponseEntity.getBody();
     }
 
-    public static void createProduct(int creditId, String productName, int value) {
-        String url = PRODUCT_BASE_URL + buildPath(CREATE_PRODUCT_PATH, String.valueOf(creditId), productName, String.valueOf(value));
-        restTemplate.postForLocation(url, null);
+    public static void deleteProductById(int productId){
+        String url = PRODUCT_BASE_URL + buildPath(DELETE_PRODUCT_PATH, String.valueOf(productId));
+        restTemplate.delete(url);
     }
+
 
 
     public static void createCredit(int creditId, String nameCredit) {
