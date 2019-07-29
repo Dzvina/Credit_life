@@ -13,4 +13,8 @@ public interface CreditDao {
     Credit getCreditById(int creditId);
 
     void deleteCreditById(int creditId);
+
+    List<Credit> getCreditsByCustomerId(int customerId);
+
+    List<Credit> getCreditsByProductId(int productId);
 }

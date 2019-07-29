@@ -2,6 +2,8 @@ package com.matyashdo.credit_ws.service.impl;
 
 import com.matyashdo.credit_ws.dao.CreditDao;
 import com.matyashdo.credit_ws.dto.CreditDto;
+import com.matyashdo.credit_ws.dto.CustomerDto;
+import com.matyashdo.credit_ws.dto.ProductDto;
 import com.matyashdo.credit_ws.model.Credit;
 import com.matyashdo.credit_ws.service.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +41,17 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public void deleteCreditById(int creditId) {
         creditDao.deleteCreditById(creditId);
+    }
+
+    @Override
+    public List<Credit> getCreditsByCustomerId(int customerId) {
+        List<Credit> credits = creditDao.getCreditsByCustomerId(customerId);
+        return credits;
+    }
+
+    @Override
+    public List<Credit> getCreditsByProductId(int productId) {
+        List<Credit> credits = creditDao.getCreditsByProductId(productId);
+        return credits;
     }
 }

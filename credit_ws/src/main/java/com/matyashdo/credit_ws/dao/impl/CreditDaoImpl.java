@@ -40,4 +40,17 @@ public class CreditDaoImpl implements CreditDao {
         jdbcTemplate.update(sql, creditId);
     }
 
+    @Override
+    public List<Credit> getCreditsByCustomerId(int customerId) {
+        String sql = "select * from credit where customer_id = ?";
+        List<Credit> credits = jdbcTemplate.query(sql, new Object[]{customerId}, new BeanPropertyRowMapper<>(Credit.class));
+        return credits;
+    }
+
+    @Override
+    public List<Credit> getCreditsByProductId(int productId) {
+        String sql = "select * from credit where product_id = ?";
+        List<Credit> credits = jdbcTemplate.query(sql, new Object[]{productId}, new BeanPropertyRowMapper<>(Credit.class));
+        return credits;
+    }
 }

@@ -7,12 +7,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestClient {
 
-    private static final String CREDIT_BASE_URL = "http://localhost:8081/credit";
-    private static final String CREATE_CREDIT_PATH = "/nameCredit/{0}/create";
-    private static final String GET_CREDIT_PATH = "/creditId/{0}/getCredit";
+    private static final String CREDIT_BASE_URL = "http://localhost:8081";
+    private static final String CREATE_CREDIT_PATH = "/api/v1/credits/create";
+    private static final String GET_CREDIT_BY_ID_PATH = "/api/v1/credits/{0}";
+    private static final String DELETE_CREDIT_PATH = "/api/v1/credits/{0}/delete";
+    private static final String GET_CREDIT_BY_CUSTOMER_ID_PATH = "/api/v1/credits/{0}/customer";
+    private static final String GET_CREDIT_BY_PRODUCT_ID_PATH = "/api/v1/credits/{0}/product";
 
     private static final String CUSTOMER_BASE_URL = "http://localhost:8082";
     private static final String CREATE_CUSTOMER_PATH = "/api/v1/customers/create";
@@ -26,6 +31,35 @@ public class RestClient {
     private static final String DELETE_PRODUCT_PATH = "/api/v1/products/{0}/delete";
 
     private static RestTemplate restTemplate = new RestTemplate();
+
+
+    public static void createCredit(CreditDto creditDto) {
+        String url = CREDIT_BASE_URL + CREATE_CREDIT_PATH;
+        restTemplate.postForLocation(url, creditDto);
+    }
+
+    public static CreditDto getCreditById(int creditId) {
+        String url = CREDIT_BASE_URL + buildPath(GET_CREDIT_BY_ID_PATH, String.valueOf(creditId));
+        ResponseEntity<CreditDto> creditResponseEntity = restTemplate.getForEntity(url, CreditDto.class);
+        return creditResponseEntity.getBody();
+    }
+
+    public static void deleteCreditById(int creditId) {
+        String url = CREDIT_BASE_URL + buildPath(DELETE_CREDIT_PATH, String.valueOf(creditId));
+        restTemplate.delete(url);
+    }
+
+    public static List<CreditDto> getCreditsByCustomerId(int customerId) {
+        String url = CREDIT_BASE_URL + buildPath(GET_CREDIT_BY_CUSTOMER_ID_PATH, String.valueOf(customerId));
+        List<CreditDto> creditDtos = (ArrayList<CreditDto>) restTemplate.getForObject(url, List.class);
+        return creditDtos;
+    }
+
+    public static List<CreditDto> getCreditsByProductId(int productId) {
+        String url = CREDIT_BASE_URL + buildPath(GET_CREDIT_BY_PRODUCT_ID_PATH, String.valueOf(productId));
+        List<CreditDto> creditDtos = (ArrayList<CreditDto>) restTemplate.getForObject(url, List.class);
+        return  creditDtos;
+    }
 
 
     public static void createCustomer(CustomerDto customerDto) {
@@ -51,7 +85,6 @@ public class RestClient {
     }
 
 
-
     public static void createProduct(ProductDto productDto) {
         String url = PRODUCT_BASE_URL + buildPath(CREATE_PRODUCT_PATH);
         restTemplate.postForLocation(url, productDto);
@@ -63,22 +96,9 @@ public class RestClient {
         return productResponseEntity.getBody();
     }
 
-    public static void deleteProductById(int productId){
+    public static void deleteProductById(int productId) {
         String url = PRODUCT_BASE_URL + buildPath(DELETE_PRODUCT_PATH, String.valueOf(productId));
         restTemplate.delete(url);
-    }
-
-
-
-    public static void createCredit(int creditId, String nameCredit) {
-        String url = CREDIT_BASE_URL + buildPath(CREATE_CREDIT_PATH, String.valueOf(creditId), nameCredit);
-        restTemplate.postForLocation(url, null);
-    }
-
-    public static CreditDto getCredit(int creditId) {
-        String url = CREDIT_BASE_URL + buildPath(GET_CREDIT_PATH, String.valueOf(creditId));
-        ResponseEntity<CreditDto> creditResponseEntity = restTemplate.getForEntity(url, CreditDto.class);
-        return creditResponseEntity.getBody();
     }
 
 
@@ -86,4 +106,5 @@ public class RestClient {
         String resourcePath = MessageFormat.format(pathTemplate, args);
         return resourcePath;
     }
+
 }
