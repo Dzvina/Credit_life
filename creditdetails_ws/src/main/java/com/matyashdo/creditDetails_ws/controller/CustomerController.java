@@ -2,6 +2,7 @@ package com.matyashdo.creditDetails_ws.controller;
 
 
 import com.matyashdo.creditDetails_ws.dto.CustomerDto;
+import com.matyashdo.creditDetails_ws.exception.ValidationException;
 import com.matyashdo.creditDetails_ws.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping(value = "/create")
-    public void addCustomer(@RequestBody CustomerDto customerDto) {
+    public void addCustomer(@RequestBody CustomerDto customerDto) throws ValidationException {
         customerService.addCustomer(customerDto);
     }
 
@@ -24,7 +25,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/pesels/{pesel}")
-    public CustomerDto getCustomerByPesel(@PathVariable(value = "pesel") String pesel) {
+    public CustomerDto getCustomerByPesel(@PathVariable(value = "pesel") String pesel) throws ValidationException {
         return customerService.getCustomerByPesel(pesel);
     }
 

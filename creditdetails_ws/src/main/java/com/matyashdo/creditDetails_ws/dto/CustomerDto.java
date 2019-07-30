@@ -1,5 +1,7 @@
 package com.matyashdo.creditDetails_ws.dto;
 
+import com.matyashdo.creditDetails_ws.utils.ValidationUtils;
+
 import java.util.Objects;
 
 
