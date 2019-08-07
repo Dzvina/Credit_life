@@ -16,6 +16,7 @@ public class ValidationUtils {
         try {
             Long.valueOf(pesel);
         } catch (NumberFormatException e) {
+            //LOGGER.error("Pesel is not numeric");
             return false;
         }
         return true;
