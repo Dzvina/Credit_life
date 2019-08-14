@@ -8,15 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class CreditControllerTest {
 
@@ -24,8 +22,9 @@ public class CreditControllerTest {
     private static final int CUSTOMER_ID = 1;
     private static final int PRODUCT_ID = 1;
     private static final String NAME_CREDIT = "credit1";
-    CreditDto creditDto = new CreditDto();
-    Credit credit = new Credit();
+
+    private CreditDto creditDto = new CreditDto();
+    private Credit expectedCredit = new Credit();
 
     @Mock
     private CreditService creditService;
@@ -36,74 +35,63 @@ public class CreditControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        expectedCredit.setCreditId(CREDIT_ID);
+        expectedCredit.setCustomerId(CUSTOMER_ID);
+        expectedCredit.setProductId(PRODUCT_ID);
+        expectedCredit.setNameCredit(NAME_CREDIT);
     }
 
     @Test
     public void testAddCredit() {
-        doNothing().when(creditService).addCredit(any(CreditDto.class));
         creditController.addCredit(creditDto);
         verify(creditService).addCredit(creditDto);
     }
 
     @Test
     public void testGetAllCredits() {
-        credit.setCreditId(CREDIT_ID);
-        credit.setCustomerId(CUSTOMER_ID);
-        credit.setProductId(PRODUCT_ID);
-        credit.setNameCredit(NAME_CREDIT);
         List<Credit> credits = new ArrayList<>();
-        credits.add(credit);
+        credits.add(expectedCredit);
+
         when(creditService.getAllCredits()).thenReturn(credits);
+
         List<Credit> actualCreditsList = creditController.getAllCredits();
         Assert.assertEquals(credits, actualCreditsList);
     }
 
     @Test
     public void testGetCreditById() {
-        credit.setCreditId(CREDIT_ID);
-        credit.setCustomerId(CUSTOMER_ID);
-        credit.setProductId(PRODUCT_ID);
-        credit.setNameCredit(NAME_CREDIT);
+        when(creditService.getCreditById(CREDIT_ID)).thenReturn(expectedCredit);
 
-        Credit credit1 = new Credit();
-        credit1.setCreditId(CREDIT_ID);
-        credit1.setCustomerId(CUSTOMER_ID);
-        credit1.setProductId(PRODUCT_ID);
-        credit1.setNameCredit(NAME_CREDIT);
-        when(creditService.getCreditById(CREDIT_ID)).thenReturn(credit);
-        Assert.assertEquals(credit, credit1);
+        Credit actualCredit = creditController.getCreditById(CREDIT_ID);
+        Assert.assertEquals(expectedCredit, actualCredit);
     }
 
     @Test
     public void testDeleteCreditById() {
-        doNothing().when(creditService).deleteCreditById(CREDIT_ID);
         creditController.deleteCreditById(CREDIT_ID);
         verify(creditService).deleteCreditById(CREDIT_ID);
     }
 
     @Test
     public void testGetCreditsByCustomerId() {
-        credit.setCreditId(CREDIT_ID);
-        credit.setCustomerId(CUSTOMER_ID);
-        credit.setProductId(PRODUCT_ID);
-        credit.setNameCredit(NAME_CREDIT);
         List<Credit> credits = new ArrayList<>();
-        credits.add(credit);
+        credits.add(expectedCredit);
+
         when(creditService.getCreditsByCustomerId(CUSTOMER_ID)).thenReturn(credits);
-        List<Credit> credits1 = creditController.getCreditsByCustomerId(CUSTOMER_ID);
-        Assert.assertEquals(credits, credits1);
+
+        List<Credit> actualCreditList = creditController.getCreditsByCustomerId(CUSTOMER_ID);
+        Assert.assertEquals(credits, actualCreditList);
     }
 
     @Test
     public void testGetCreditsByProductId() {
-        credit.setCreditId(CREDIT_ID);
-        credit.setCustomerId(CUSTOMER_ID);
-        credit.setProductId(PRODUCT_ID);
-        credit.setNameCredit(NAME_CREDIT);
         List<Credit> credits = new ArrayList<>();
-        credits.add(credit);
+        credits.add(expectedCredit);
+
         when(creditService.getCreditsByProductId(PRODUCT_ID)).thenReturn(credits);
-        List<Credit> credits1 = creditController.getCreditsByProductId(PRODUCT_ID);
-        Assert.assertEquals(credits, credits1);
+
+        List<Credit> actualCreditList = creditController.getCreditsByProductId(PRODUCT_ID);
+        Assert.assertEquals(credits, actualCreditList);
     }
 }
