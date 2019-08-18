@@ -20,7 +20,7 @@ public class CreditDaoImplTest {
     private static final int PRODUCT_ID = 1;
     private static final String NAME_CREDIT = "credit1";
 
-    Credit credit = new Credit();
+    private Credit credit = new Credit();
 
     @Mock
     private JdbcTemplate jdbcTemplate;
