@@ -47,12 +47,12 @@ public class CreditDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CreditDto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         CreditDto creditDto = (CreditDto) o;
         return creditId == creditDto.creditId &&
                 customerId == creditDto.customerId &&
                 productId == creditDto.productId &&
-                nameCredit.equals(creditDto.nameCredit);
+                Objects.equals(nameCredit, creditDto.nameCredit);
     }
 
     @Override

@@ -52,11 +52,11 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return productId == product.productId &&
                 value == product.value &&
-                productName.equals(product.productName);
+                Objects.equals(productName, product.productName);
     }
 
     @Override

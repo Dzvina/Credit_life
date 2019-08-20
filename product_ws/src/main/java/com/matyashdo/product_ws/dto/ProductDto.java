@@ -39,11 +39,11 @@ public class ProductDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProductDto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
         return productId == that.productId &&
                 value == that.value &&
-                productName.equals(that.productName);
+                Objects.equals(productName, that.productName);
     }
 
     @Override

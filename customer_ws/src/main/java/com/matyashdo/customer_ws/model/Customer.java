@@ -64,12 +64,12 @@ public class Customer {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return customerId == customer.customerId &&
-                firstNameCustomer.equals(customer.firstNameCustomer) &&
-                lastNameCustomer.equals(customer.lastNameCustomer) &&
-                peselCustomer.equals(customer.peselCustomer);
+                Objects.equals(firstNameCustomer, customer.firstNameCustomer) &&
+                Objects.equals(lastNameCustomer, customer.lastNameCustomer) &&
+                Objects.equals(peselCustomer, customer.peselCustomer);
     }
 
     @Override

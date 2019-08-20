@@ -50,12 +50,12 @@ public class CustomerDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CustomerDto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         CustomerDto that = (CustomerDto) o;
         return customerId == that.customerId &&
-                firstNameCustomer.equals(that.firstNameCustomer) &&
-                lastNameCustomer.equals(that.lastNameCustomer) &&
-                peselCustomer.equals(that.peselCustomer);
+                Objects.equals(firstNameCustomer, that.firstNameCustomer) &&
+                Objects.equals(lastNameCustomer, that.lastNameCustomer) &&
+                Objects.equals(peselCustomer, that.peselCustomer);
     }
 
     @Override

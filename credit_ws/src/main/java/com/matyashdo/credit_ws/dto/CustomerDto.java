@@ -17,7 +17,7 @@ public class CustomerDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CustomerDto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         CustomerDto that = (CustomerDto) o;
         return customerId == that.customerId;
     }
