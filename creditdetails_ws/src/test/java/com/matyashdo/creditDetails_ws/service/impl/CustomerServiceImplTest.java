@@ -1,6 +1,5 @@
 package com.matyashdo.creditDetails_ws.service.impl;
 
-import com.matyashdo.creditDetails_ws.client.RestClientCredit;
 import com.matyashdo.creditDetails_ws.client.RestClientCustomer;
 import com.matyashdo.creditDetails_ws.dto.CustomerDto;
 import com.matyashdo.creditDetails_ws.exception.ValidationException;
@@ -11,8 +10,6 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import javax.validation.Validation;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -46,38 +43,53 @@ public class CustomerServiceImplTest {
         customerDto.setPeselCustomer(PESEL_CUSTOMER);
     }
 
-    @Test
-    public void addCustomer() {
-    }
 
     @Test(expected = ValidationException.class)
-    public void TestAddCustomerThrowsExceptionWhenPeselNotValid() throws ValidationException {
+    public void testAddCustomerThrowsExceptionWhenPeselNotValid() throws ValidationException {
         when(validationUtils.peselIsValid(anyString())).thenReturn(false);
         customerServiceImpl.addCustomer(customerDto);
     }
 
     @Test(expected = ValidationException.class)
-    public void TestAddCustomerThrowsExceptionWhenPeselValid() throws ValidationException {
+    public void testAddCustomerThrowsExceptionWhenPeselIsValidAndCustomerExists() throws ValidationException {
         when(validationUtils.peselIsValid(anyString())).thenReturn(true);
+        customerDto.setPeselCustomer(PESEL_CUSTOMER);
+        when(restClientCustomer.getCustomerByPesel(PESEL_CUSTOMER)).thenReturn(customerDto);
         customerServiceImpl.addCustomer(customerDto);
     }
 
+    @Test
+    public void testAddCustomerWhenPeselIsCorrectAndCustomerNotExist() throws ValidationException {
+        when(validationUtils.peselIsValid(anyString())).thenReturn(true);
+        when(restClientCustomer.getCustomerByPesel(null)).thenReturn(customerDto);
+        customerServiceImpl.addCustomer(customerDto);
+        verify(restClientCustomer).createCustomer(customerDto);
+    }
 
     @Test
-    public void getCustomerById() {
+    public void testGetCustomerById() {
         when(restClientCustomer.getCustomerById(CUSTOMER_ID)).thenReturn(customerDto);
 
         CustomerDto actualCustomer = customerServiceImpl.getCustomerById(CUSTOMER_ID);
         Assert.assertEquals(customerDto, actualCustomer);
     }
 
-    @Test
-    public void getCustomerByPesel() {
-
+    @Test(expected = ValidationException.class)
+    public void testGetCustomerByPeselThrowsExceptionWhenPeselNotValid() throws ValidationException {
+        when(validationUtils.peselIsValid(anyString())).thenReturn(false);
+        customerServiceImpl.getCustomerByPesel(PESEL_CUSTOMER);
     }
 
     @Test
-    public void deleteCustomerById() {
+    public void testGetCustomerByPeselWhenPeselValid() throws ValidationException {
+        when(validationUtils.peselIsValid(PESEL_CUSTOMER)).thenReturn(true);
+        customerServiceImpl.getCustomerByPesel(PESEL_CUSTOMER);
+        verify(restClientCustomer).getCustomerByPesel(PESEL_CUSTOMER);
+    }
+
+
+    @Test
+    public void testDeleteCustomerById() {
         customerServiceImpl.deleteCustomerById(CUSTOMER_ID);
         verify(restClientCustomer).deleteCustomerById(CUSTOMER_ID);
     }
