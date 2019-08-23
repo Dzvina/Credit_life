@@ -63,9 +63,8 @@ public class CreditControllerTest {
     @Test
     public void testGetCreditsByCustomerId() {
         List<CreditDto> creditDtos = new ArrayList<>();
-        creditDtos.add(creditDto);
 
-        when(creditService.getCreditByCustomerId(CUSTOMER_ID)).thenReturn(creditDtos);
+        when(creditService.getCreditByCustomerId(CUSTOMER_ID)).thenReturn(new ArrayList<>());
 
         List<CreditDto> actualCreditDtoList = creditController.getCreditsByCustomerId(CUSTOMER_ID);
         Assert.assertEquals(creditDtos, actualCreditDtoList);
@@ -74,9 +73,8 @@ public class CreditControllerTest {
     @Test
     public void testGetCreditsByProductId() {
         List<CreditDto> creditDtos = new ArrayList<>();
-        creditDtos.add(creditDto);
 
-        when(creditService.getCreditByProductId(PRODUCT_ID)).thenReturn(creditDtos);
+        when(creditService.getCreditByProductId(PRODUCT_ID)).thenReturn(new ArrayList<>());
 
         List<CreditDto> actualCreditDtoList = creditController.getCreditsByProductId(PRODUCT_ID);
         Assert.assertEquals(creditDtos, actualCreditDtoList);

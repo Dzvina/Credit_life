@@ -1,16 +1,22 @@
 package com.matyashdo.creditDetails_ws.client;
 
 import com.matyashdo.creditDetails_ws.dto.CreditDto;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class RestClientCreditTest {
 
@@ -19,12 +25,11 @@ public class RestClientCreditTest {
     private static final int PRODUCT_ID = 1;
     private static final String NAME_CREDIT = "credit1";
 
-    private static final String CREDIT_BASE_URL = "http://localhost:8081";
-    private static final String CREATE_CREDIT_PATH = "/api/v1/credits/create";
-    private static final String GET_CREDIT_BY_ID_PATH = "/api/v1/credits/{0}";
-    private static final String DELETE_CREDIT_PATH = "/api/v1/credits/{0}/delete";
-    private static final String GET_CREDIT_BY_CUSTOMER_ID_PATH = "/api/v1/credits/{0}/customer";
-    private static final String GET_CREDIT_BY_PRODUCT_ID_PATH = "/api/v1/credits/{0}/product";
+    private static final String CREATE_CREDIT_URL = "http://localhost:8081/api/v1/credits/create";
+    private static final String GET_CREDIT_BY_ID_URL = "http://localhost:8081/api/v1/credits/1";
+    private static final String DELETE_CREDIT_URL = "http://localhost:8081/api/v1/credits/1/delete";
+    private static final String GET_CREDIT_BY_CUSTOMER_ID_URL = "http://localhost:8081/api/v1/credits/1/customer";
+    private static final String GET_CREDIT_BY_PRODUCT_ID_URL = "http://localhost:8081/api/v1/credits/1/product";
 
     private CreditDto creditDto = new CreditDto();
 
@@ -46,24 +51,45 @@ public class RestClientCreditTest {
 
     @Test
     public void testCreateCredit() {
-        String url = CREDIT_BASE_URL + CREATE_CREDIT_PATH;
         restClientCredit.createCredit(creditDto);
-        verify(restTemplate).postForLocation(url,creditDto);
+        verify(restTemplate).postForLocation(CREATE_CREDIT_URL, creditDto);
     }
 
     @Test
     public void testGetCreditById() {
+        ResponseEntity<CreditDto> responseEntity = new ResponseEntity(creditDto, HttpStatus.OK);
+
+        when(restTemplate.getForEntity(GET_CREDIT_BY_ID_URL, CreditDto.class)).thenReturn(responseEntity);
+        CreditDto actualCreditDto = restClientCredit.getCreditById(CREDIT_ID);
+
+        Assert.assertEquals(creditDto, actualCreditDto);
     }
 
     @Test
     public void testDeleteCreditById() {
+        restClientCredit.deleteCreditById(CREDIT_ID);
+        verify(restTemplate).delete(DELETE_CREDIT_URL);
     }
 
     @Test
     public void testGetCreditsByCustomerId() {
+        List<CreditDto> expectedCreditDtoList = new ArrayList<>();
+
+        when(restTemplate.getForObject(GET_CREDIT_BY_CUSTOMER_ID_URL, List.class)).thenReturn(new ArrayList<>());
+
+        List<CreditDto> actualCreditDtoList = restClientCredit.getCreditsByCustomerId(CUSTOMER_ID);
+
+        Assert.assertEquals(expectedCreditDtoList, actualCreditDtoList);
     }
 
     @Test
     public void testGetCreditsByProductId() {
+        List<CreditDto> expectedCreditDtoList = new ArrayList<>();
+
+        when(restTemplate.getForObject(GET_CREDIT_BY_PRODUCT_ID_URL, List.class)).thenReturn(new ArrayList<>());
+
+        List<CreditDto> actualCreditDtoList = restClientCredit.getCreditsByProductId(PRODUCT_ID);
+
+        Assert.assertEquals(expectedCreditDtoList, actualCreditDtoList);
     }
 }

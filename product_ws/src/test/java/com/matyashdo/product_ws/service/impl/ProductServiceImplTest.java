@@ -53,7 +53,7 @@ public class ProductServiceImplTest {
     public void testGetAllProduct() {
         List<Product> products = new ArrayList<>();
 
-        when(productDao.getAllProduct()).thenReturn(products);
+        when(productDao.getAllProduct()).thenReturn(new ArrayList<>());
 
         List<Product> actualProductList = productServiceImpl.getAllProduct();
         Assert.assertEquals(products, actualProductList);

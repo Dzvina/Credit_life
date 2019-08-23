@@ -53,7 +53,7 @@ public class CustomerDaoImplTest {
     public void testGetAllCustomers() {
         List<Customer> customers = new ArrayList<>();
 
-        when(jdbcTemplate.query(anyString(), any(BeanPropertyRowMapper.class))).thenReturn(customers);
+        when(jdbcTemplate.query(anyString(), any(BeanPropertyRowMapper.class))).thenReturn(new ArrayList<>());
 
         List<Customer> actualCustomerList = customerDaoImpl.getAllCustomers();
         Assert.assertEquals(customers, actualCustomerList);

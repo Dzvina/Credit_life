@@ -53,7 +53,7 @@ public class CreditDaoImplTest {
     public void testGetAllCredits() {
         List<Credit> credits = new ArrayList<>();
 
-        when(jdbcTemplate.query(any(String.class), any(BeanPropertyRowMapper.class))).thenReturn(credits);
+        when(jdbcTemplate.query(any(String.class), any(BeanPropertyRowMapper.class))).thenReturn(new ArrayList<>());
 
         List<Credit> actualCreditList = creditDaoImpl.getAllCredits();
         Assert.assertEquals(credits, actualCreditList);
@@ -78,10 +78,9 @@ public class CreditDaoImplTest {
     @Test
     public void testGetCreditsByCustomerId() {
         List<Credit> creditList = new ArrayList<>();
-        creditList.add(credit);
 
         when(jdbcTemplate.query(anyString(), objectsArray.capture(), any(BeanPropertyRowMapper.class)))
-                .thenReturn(creditList);
+                .thenReturn(new ArrayList<>());
 
         List<Credit> actualCreditList = creditDaoImpl.getCreditsByCustomerId(CUSTOMER_ID);
 
@@ -91,10 +90,9 @@ public class CreditDaoImplTest {
     @Test
     public void testGetCreditsByProductId() {
         List<Credit> creditList = new ArrayList<>();
-        creditList.add(credit);
 
         when(jdbcTemplate.query(anyString(), objectsArray.capture(), any(BeanPropertyRowMapper.class)))
-                .thenReturn(creditList);
+                .thenReturn(new ArrayList<>());
 
         List<Credit> actualCreditList = creditDaoImpl.getCreditsByProductId(PRODUCT_ID);
 

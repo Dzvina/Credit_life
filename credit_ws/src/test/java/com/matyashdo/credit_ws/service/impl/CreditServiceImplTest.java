@@ -55,7 +55,7 @@ public class CreditServiceImplTest {
     public void testGetAllCredits() {
         List<Credit> expectedCreditList = new ArrayList<>();
 
-        when(creditDao.getAllCredits()).thenReturn(expectedCreditList);
+        when(creditDao.getAllCredits()).thenReturn(new ArrayList<>());
 
         List<Credit> actualCreditList = creditServiceImpl.getAllCredits();
         Assert.assertEquals(expectedCreditList, actualCreditList);
@@ -79,9 +79,8 @@ public class CreditServiceImplTest {
     @Test
     public void testGetCreditsByCustomerId() {
         List<Credit> credits = new ArrayList<>();
-        credits.add(credit);
 
-        when(creditDao.getCreditsByCustomerId(CUSTOMER_ID)).thenReturn(credits);
+        when(creditDao.getCreditsByCustomerId(CUSTOMER_ID)).thenReturn(new ArrayList<>());
 
         List<Credit> actualCreditList = creditServiceImpl.getCreditsByCustomerId(CUSTOMER_ID);
         Assert.assertEquals(credits, actualCreditList);
@@ -90,9 +89,8 @@ public class CreditServiceImplTest {
     @Test
     public void testGetCreditsByProductId() {
         List<Credit> credits = new ArrayList<>();
-        credits.add(credit);
 
-        when(creditDao.getCreditsByProductId(PRODUCT_ID)).thenReturn(credits);
+        when(creditDao.getCreditsByProductId(PRODUCT_ID)).thenReturn(new ArrayList<>());
 
         List<Credit> actualCreditList = creditServiceImpl.getCreditsByProductId(PRODUCT_ID);
         Assert.assertEquals(credits, actualCreditList);

@@ -55,7 +55,7 @@ public class CustomerServiceImplTest {
     public void testGetAllCustomers() {
         List<Customer> expectedCustomerList = new ArrayList<>();
 
-        when(customerDao.getAllCustomers()).thenReturn(expectedCustomerList);
+        when(customerDao.getAllCustomers()).thenReturn(new ArrayList<>());
 
         List<Customer> actualCustomerList = customerServiceImpl.getAllCustomers();
         Assert.assertEquals(expectedCustomerList, actualCustomerList);

@@ -50,7 +50,7 @@ public class ProductControllerTest {
     public void testGetAllProduct() {
         List<Product> products = new ArrayList<>();
 
-        when(productService.getAllProduct()).thenReturn(products);
+        when(productService.getAllProduct()).thenReturn(new ArrayList<>());
 
         List<Product> actualProductList = productController.getAllProduct();
         Assert.assertEquals(products, actualProductList);

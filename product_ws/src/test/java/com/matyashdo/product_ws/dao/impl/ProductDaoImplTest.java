@@ -55,7 +55,7 @@ public class ProductDaoImplTest {
     public void testGetAllProduct() {
         List<Product> products = new ArrayList<>();
 
-        when(jdbcTemplate.query(anyString(), any(BeanPropertyRowMapper.class))).thenReturn(products);
+        when(jdbcTemplate.query(anyString(), any(BeanPropertyRowMapper.class))).thenReturn(new ArrayList<>());
 
         List<Product> actualProductList = productDaoImpl.getAllProduct();
         Assert.assertEquals(products, actualProductList);
