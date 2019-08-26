@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -54,5 +57,15 @@ public class ProductControllerTest {
     public void deleteProductById() {
         productController.deleteProductById(PRODUCT_ID);
         verify(productService).deleteProductById(PRODUCT_ID);
+    }
+
+    @Test
+    public void testGetAllProduct() {
+        List<ProductDto> productDtos = new ArrayList<>();
+
+        when(productService.getAllProducts()).thenReturn(new ArrayList<>());
+
+        List<ProductDto> actualProductDtoList = productController.getAllProducts();
+        Assert.assertEquals(productDtos, actualProductDtoList);
     }
 }

@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
@@ -36,5 +38,13 @@ public class ProductController {
         LOGGER.info("Received request for product deletion");
         productService.deleteProductById(productId);
         LOGGER.info("Product was successfully deleted");
+    }
+
+    @GetMapping
+    public List<ProductDto> getAllProducts(){
+        LOGGER.info("Sending get all products request to product_ws");
+        List<ProductDto> productDto = productService.getAllProducts();
+        LOGGER.info("Received following productDto in response: {}", productDto);
+        return productDto;
     }
 }

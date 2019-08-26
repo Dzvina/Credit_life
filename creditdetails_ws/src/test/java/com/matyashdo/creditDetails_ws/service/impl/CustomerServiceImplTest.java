@@ -11,6 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -92,5 +95,15 @@ public class CustomerServiceImplTest {
     public void testDeleteCustomerById() {
         customerServiceImpl.deleteCustomerById(CUSTOMER_ID);
         verify(restClientCustomer).deleteCustomerById(CUSTOMER_ID);
+    }
+
+    @Test
+    public void testGetAllCustomers(){
+        List<CustomerDto> customerDtos = new ArrayList<>();
+
+        when(restClientCustomer.getAllCustomers()).thenReturn(new ArrayList<>());
+
+        List<CustomerDto> actualCustomersList = customerServiceImpl.getAllCustomers();
+        Assert.assertEquals(customerDtos, actualCustomersList);
     }
 }

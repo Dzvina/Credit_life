@@ -30,6 +30,7 @@ public class RestClientCreditTest {
     private static final String DELETE_CREDIT_URL = "http://localhost:8081/api/v1/credits/1/delete";
     private static final String GET_CREDIT_BY_CUSTOMER_ID_URL = "http://localhost:8081/api/v1/credits/1/customer";
     private static final String GET_CREDIT_BY_PRODUCT_ID_URL = "http://localhost:8081/api/v1/credits/1/product";
+    private static final String GET_ALL_CREDITS_URL = "http://localhost:8081/api/v1/credits";
 
     private CreditDto creditDto = new CreditDto();
 
@@ -89,6 +90,17 @@ public class RestClientCreditTest {
         when(restTemplate.getForObject(GET_CREDIT_BY_PRODUCT_ID_URL, List.class)).thenReturn(new ArrayList<>());
 
         List<CreditDto> actualCreditDtoList = restClientCredit.getCreditsByProductId(PRODUCT_ID);
+
+        Assert.assertEquals(expectedCreditDtoList, actualCreditDtoList);
+    }
+
+    @Test
+    public void testGetAllCredits() {
+        List<CreditDto> expectedCreditDtoList = new ArrayList<>();
+
+        when(restTemplate.getForObject(GET_ALL_CREDITS_URL, List.class)).thenReturn(new ArrayList<>());
+
+        List<CreditDto> actualCreditDtoList = restClientCredit.getAllCredits();
 
         Assert.assertEquals(expectedCreditDtoList, actualCreditDtoList);
     }

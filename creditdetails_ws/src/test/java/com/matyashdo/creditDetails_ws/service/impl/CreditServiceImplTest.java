@@ -82,4 +82,14 @@ public class CreditServiceImplTest {
         List<CreditDto> actualCreditList = creditServiceImpl.getCreditByProductId(PRODUCT_ID);
         Assert.assertEquals(credits, actualCreditList);
     }
+
+    @Test
+    public void testGetAllCredits(){
+        List<CreditDto> credits = new ArrayList<>();
+
+        when(restClientCredit.getAllCredits()).thenReturn(new ArrayList<>());
+
+        List<CreditDto> actualCreditList = creditServiceImpl.getAllCredits();
+        Assert.assertEquals(credits, actualCreditList);
+    }
 }

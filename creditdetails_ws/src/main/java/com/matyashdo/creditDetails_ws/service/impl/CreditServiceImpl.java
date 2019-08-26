@@ -55,4 +55,12 @@ public class CreditServiceImpl implements CreditService {
         LOGGER.info("Received following creditDto in response: {}", creditDto);
         return creditDto;
     }
+
+    @Override
+    public List<CreditDto> getAllCredits() {
+        LOGGER.info("Sending get all credits request to credit_ws");
+        List<CreditDto> creditDto = restClientCredit.getAllCredits();
+        LOGGER.info("Received following creditDto in response: {}", creditDto);
+        return creditDto;
+    }
 }

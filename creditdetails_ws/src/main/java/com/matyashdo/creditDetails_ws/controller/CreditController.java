@@ -56,4 +56,12 @@ public class CreditController {
         LOGGER.info("Credits: {} was successfully fetched", creditDto);
         return creditDto;
     }
+
+    @GetMapping
+    public List<CreditDto> getAllCredits(){
+        LOGGER.info("Received request for get all credits");
+        List<CreditDto> creditDto = creditService.getAllCredits();
+        LOGGER.info("Credits: {} was successfully fetched", creditDto);
+        return creditDto;
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RestClientCustomer {
@@ -16,7 +18,7 @@ public class RestClientCustomer {
     private static final String GET_CUSTOMER_BY_ID_PATH = "/api/v1/customers/{0}";
     private static final String GET_CUSTOMER_BY_PESEL_PATH = "/api/v1/customers/pesels/{0}";
     private static final String DELETE_CUSTOMER_PATH = "/api/v1/customers/{0}/delete";
-
+    private static final String GET_ALL_CUSTOMERS_PATH = "/api/v1/customers";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -41,6 +43,12 @@ public class RestClientCustomer {
     public void deleteCustomerById(int customerId) {
         String url = CUSTOMER_BASE_URL + buildPath(DELETE_CUSTOMER_PATH, String.valueOf(customerId));
         restTemplate.delete(url);
+    }
+
+    public List<CustomerDto> getAllCustomers(){
+        String url = CUSTOMER_BASE_URL + GET_ALL_CUSTOMERS_PATH;
+        List<CustomerDto> customerDtos = (ArrayList<CustomerDto>) restTemplate.getForObject(url, List.class);
+        return customerDtos;
     }
 
 

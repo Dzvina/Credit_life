@@ -79,4 +79,14 @@ public class CreditControllerTest {
         List<CreditDto> actualCreditDtoList = creditController.getCreditsByProductId(PRODUCT_ID);
         Assert.assertEquals(creditDtos, actualCreditDtoList);
     }
+
+    @Test
+    public void testGetAllCredits() {
+        List<CreditDto> creditDtos = new ArrayList<>();
+
+        when(creditService.getAllCredits()).thenReturn(new ArrayList<>());
+
+        List<CreditDto> actualCreditDtoList = creditController.getAllCredits();
+        Assert.assertEquals(creditDtos, actualCreditDtoList);
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RestClientProduct {
@@ -15,7 +17,7 @@ public class RestClientProduct {
     private static final String CREATE_PRODUCT_PATH = "/api/v1/products/create";
     private static final String GET_PRODUCT_BY_ID_PATH = "/api/v1/products/{0}";
     private static final String DELETE_PRODUCT_PATH = "/api/v1/products/{0}/delete";
-
+    private static final String GET_ALL_PRODUCTS_PATH = "/api/v1/products";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -34,6 +36,12 @@ public class RestClientProduct {
     public void deleteProductById(int productId) {
         String url = PRODUCT_BASE_URL + buildPath(DELETE_PRODUCT_PATH, String.valueOf(productId));
         restTemplate.delete(url);
+    }
+
+    public List<ProductDto> getAllProducts(){
+        String url = PRODUCT_BASE_URL + GET_ALL_PRODUCTS_PATH;
+        List<ProductDto> productDtos = (ArrayList<ProductDto>) restTemplate.getForObject(url, List.class);
+        return productDtos;
     }
 
     private String buildPath(String pathTemplate, String... args) {

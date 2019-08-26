@@ -19,6 +19,7 @@ public class RestClientCredit {
     private static final String DELETE_CREDIT_PATH = "/api/v1/credits/{0}/delete";
     private static final String GET_CREDIT_BY_CUSTOMER_ID_PATH = "/api/v1/credits/{0}/customer";
     private static final String GET_CREDIT_BY_PRODUCT_ID_PATH = "/api/v1/credits/{0}/product";
+    private static final String GET_ALL_CREDITS_PATH = "/api/v1/credits";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -49,6 +50,12 @@ public class RestClientCredit {
         String url = CREDIT_BASE_URL + buildPath(GET_CREDIT_BY_PRODUCT_ID_PATH, String.valueOf(productId));
         List<CreditDto> creditDtos = (ArrayList<CreditDto>) restTemplate.getForObject(url, List.class);
         return  creditDtos;
+    }
+
+    public List<CreditDto> getAllCredits(){
+       String url = CREDIT_BASE_URL + GET_ALL_CREDITS_PATH;
+       List<CreditDto> creditDtos = (ArrayList<CreditDto>) restTemplate.getForObject(url, List.class);
+        return creditDtos;
     }
 
     private String buildPath(String pathTemplate, String... args) {

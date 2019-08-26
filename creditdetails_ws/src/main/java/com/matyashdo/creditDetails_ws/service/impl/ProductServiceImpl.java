@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -36,5 +38,13 @@ public class ProductServiceImpl implements ProductService {
         LOGGER.info("Sending delete product by id request to product_ws");
         restClientProduct.deleteProductById(productId);
         LOGGER.info("Product deleted successfully");
+    }
+
+    @Override
+    public List<ProductDto> getAllProducts() {
+        LOGGER.info("Sending get all products request to product_ws");
+        List<ProductDto> productDto = restClientProduct.getAllProducts();
+        LOGGER.info("Received following productDto in response: {}", productDto);
+        return productDto;
     }
 }

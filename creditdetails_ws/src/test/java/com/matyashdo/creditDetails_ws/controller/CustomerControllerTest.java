@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -64,5 +67,15 @@ public class CustomerControllerTest {
     public void testDeleteCustomerById() {
         customerController.deleteCustomerById(CUSTOMER_ID);
         verify(customerService).deleteCustomerById(CUSTOMER_ID);
+    }
+
+    @Test
+    public void testGetAllCustomers() {
+        List<CustomerDto> customerDtos = new ArrayList<>();
+
+        when(customerService.getAllCustomers()).thenReturn(new ArrayList<>());
+
+        List<CustomerDto> actualCustomerDtoList = customerController.getAllCustomers();
+        Assert.assertEquals(customerDtos, actualCustomerDtoList);
     }
 }

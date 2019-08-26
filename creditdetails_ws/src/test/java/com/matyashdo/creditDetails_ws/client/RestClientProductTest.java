@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,6 +29,7 @@ public class RestClientProductTest {
     private static final String CREATE_PRODUCT_URL = "http://localhost:8083/api/v1/products/create";
     private static final String GET_PRODUCT_BY_ID_URL = "http://localhost:8083/api/v1/products/1";
     private static final String DELETE_PRODUCT_URL = "http://localhost:8083/api/v1/products/1/delete";
+    private static final String GET_ALL_PRODUCTS_URL = "http://localhost:8083/api/v1/products";
 
 
     private ProductDto productDto = new ProductDto();
@@ -64,5 +68,16 @@ public class RestClientProductTest {
     public void deleteProductById() {
         restClientProduct.deleteProductById(PRODUCT_ID);
         verify(restTemplate).delete(DELETE_PRODUCT_URL);
+    }
+
+    @Test
+    public void testGetAllCustomersProducts() {
+        List<ProductDto> expectedProductDtoList = new ArrayList<>();
+
+        when(restTemplate.getForObject(GET_ALL_PRODUCTS_URL, List.class)).thenReturn(new ArrayList<>());
+
+        List<ProductDto> actualProductDtoList = restClientProduct.getAllProducts();
+
+        Assert.assertEquals(expectedProductDtoList, actualProductDtoList);
     }
 }

@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -63,5 +65,13 @@ public class CustomerServiceImpl implements CustomerService {
         LOGGER.info("Sending delete customer by id request to customer_ws");
         restClientCustomer.deleteCustomerById(customerId);
         LOGGER.info("Customer deleted successfully");
+    }
+
+    @Override
+    public List<CustomerDto> getAllCustomers() {
+        LOGGER.info("Sending get all customers request to customer_ws");
+        List<CustomerDto> customerDto = restClientCustomer.getAllCustomers();
+        LOGGER.info("Received following customerDto in response: {}", customerDto);
+        return customerDto;
     }
 }

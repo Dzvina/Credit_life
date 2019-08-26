@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
@@ -46,5 +48,13 @@ public class CustomerController {
         LOGGER.info("Received request for customer deletion");
         customerService.deleteCustomerById(customerId);
         LOGGER.info("Customer was successfully deleted");
+    }
+
+    @GetMapping
+    public List<CustomerDto> getAllCustomers(){
+        LOGGER.info("Received request for get all customers");
+        List<CustomerDto> customerDto = customerService.getAllCustomers();
+        LOGGER.info("Customers: {} was successfully fetched", customerDto);
+        return customerDto;
     }
 }

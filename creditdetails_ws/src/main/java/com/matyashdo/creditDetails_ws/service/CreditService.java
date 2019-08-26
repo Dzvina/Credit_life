@@ -15,4 +15,6 @@ public interface CreditService {
     List<CreditDto> getCreditByCustomerId(int customerId);
 
     List<CreditDto> getCreditByProductId(int productId);
+
+    List<CreditDto> getAllCredits();
 }
